@@ -14,13 +14,15 @@ class TaskList extends StatelessWidget {
 
     return Container(
       color: Colors.grey[200],
-      child: Column(
-        children: [
-          TypeTaskList(type: 'A', tasks: aTasks),
-          TypeTaskList(type: 'B', tasks: bTasks),
-          TypeTaskList(type: 'C', tasks: cTasks),
-          TypeTaskList(type: 'D', tasks: dTasks),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TypeTaskList(type: 'A', tasks: aTasks),
+            TypeTaskList(type: 'B', tasks: bTasks),
+            TypeTaskList(type: 'C', tasks: cTasks),
+            TypeTaskList(type: 'D', tasks: dTasks),
+          ],
+        ),
       ),
     );
   }

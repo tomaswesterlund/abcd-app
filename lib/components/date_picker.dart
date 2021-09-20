@@ -1,59 +1,115 @@
 import 'package:abcd_app/imports.dart';
+import 'package:intl/intl.dart';
 
-class DatePicker extends StatelessWidget {
+class DatePicker extends StatefulWidget {
+  DatePicker({required this.onDateClicked});
+
+  final Function(DateTime) onDateClicked;
+
+  @override
+  _DatePickerState createState() => _DatePickerState();
+}
+
+class _DatePickerState extends State<DatePicker> {
+  bool showCalendar = false;
+  DateTime focusedDay = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
-      color: Colors.amberAccent,
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Icon(Icons.home_outlined),
-              Icon(Icons.arrow_left, size: 64.0),
-            ],
-          ),
-          Expanded(
-            child: Row(
+        padding: EdgeInsets.all(10.0),
+        color: Colors.amberAccent,
+        child: Column(
+          children: [
+            if (showCalendar)
+              TableCalendar(
+                firstDay: DateTime.utc(2010, 10, 16),
+                lastDay: DateTime.utc(2030, 3, 14),
+                focusedDay: focusedDay,
+              ),
+            Row(
               children: [
-                Container(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(width: 2, color: Colors.black),
-                  ),
-                  child: Column(
-                    children: [
-                      Text('Mon'),
-                      Text('28-Aug'),
-                    ],
+                Column(
+                  children: [
+                    GestureDetector(
+                      child: Icon(Icons.home_outlined),
+                      onTap: () {
+                        setState(
+                          () {
+                            focusedDay = DateTime.now();
+                          },
+                        );
+                      },
+                    ),
+                    Icon(Icons.arrow_left, size: 64.0),
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: -2)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: -1)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now(),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: 1)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: 2)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: 3)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: 4)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                        DateCircle(
+                          date: DateTime.now().add(Duration(days: 5)),
+                          onDateClicked: widget.onDateClicked,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(width: 2, color: Colors.black),
-                  ),
-                  child: Text('Mon, 28/3'),
+                Column(
+                  children: [
+                    GestureDetector(
+                      child: Icon(Icons.today_outlined),
+                      onTap: () {
+                        // Change the color of the container beneath
+                        setState(
+                          () {
+                            print('Changing ...');
+                            showCalendar = !showCalendar;
+                            focusedDay = DateTime(2017, 9, 7, 17, 30);
+                            //!showCalendar;
+                          },
+                        );
+                      },
+                    ),
+                    Icon(
+                      Icons.arrow_right,
+                      size: 64.0,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          Column(
-            children: [
-              Icon(Icons.today_outlined),
-              Icon(
-                Icons.arrow_right,
-                size: 64.0,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }

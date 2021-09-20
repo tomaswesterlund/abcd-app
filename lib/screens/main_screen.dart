@@ -1,5 +1,6 @@
 import 'package:abcd_app/components/current_task.dart';
 import 'package:abcd_app/imports.dart';
+import 'package:collection/collection.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -7,10 +8,20 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  DateTime selectedDate = DateTime.now();
+
+  void onDateClicked(DateTime value) {
+    setState(() {
+      print('Date clicked: $value');
+      selectedDate = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var tasks = TaskApi().getTasks();
-    var currentTask = tasks[0];
+    print('Building ...');
+    var tasks = TaskApi().getTasks(date: selectedDate);
+    var currentTask = tasks.firstOrNull;
 
     return Scaffold(
       body: Center(
@@ -19,10 +30,8 @@ class _MainScreenState extends State<MainScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             CurrentTask(task: currentTask),
-            Expanded(
-              child: TaskList(tasks: tasks),
-            ),
-            DatePicker(),
+            Expanded(child: TaskList(tasks: tasks)),
+            DatePicker(onDateClicked: onDateClicked),
           ],
         ),
       ),

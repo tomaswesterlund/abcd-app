@@ -26,23 +26,23 @@ class TypeTaskList extends StatelessWidget {
         children: [
           HorizontalOrLine(height: 10, label: type),
           ListView.builder(
-              shrinkWrap: true,
-              itemCount: tasks.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.all(5.0),
-                  child: Row(
-                    children: [
-                      Checkbox(value: false, onChanged: null),
-                      Expanded(
-                        child:
-                            Text('{$type${index + 1}} ${tasks[index].title}'),
-                      ),
-                      Icon(Icons.keyboard_arrow_down),
-                    ],
-                  ),
-                );
-              })
+            shrinkWrap: true,
+            itemCount: tasks.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                margin: EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    Checkbox(value: false, onChanged: null),
+                    Expanded(
+                      child: Text('{$type${index + 1}} ${tasks[index].title}'),
+                    ),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
