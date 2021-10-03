@@ -1,13 +1,19 @@
 import 'package:abcd_app/imports.dart';
 
-class CurrentTask extends StatelessWidget {
-  CurrentTask({required this.task});
+class CurrentTask extends StatefulWidget {
+  CurrentTask({required this.task, required this.date});
 
   final Task? task;
+  final DateTime date;
 
   @override
+  _CurrentTaskState createState() => _CurrentTaskState();
+}
+
+class _CurrentTaskState extends State<CurrentTask> {
+  @override
   Widget build(BuildContext context) {
-    if (task == null) {
+    if (widget.task == null) {
       return Container(
         padding: EdgeInsets.all(10.0),
         margin: EdgeInsets.only(bottom: 10.0),
@@ -23,12 +29,13 @@ class CurrentTask extends StatelessWidget {
         ),
         child: Column(
           children: [
+            Text('Date: ${widget.date.toString().substring(0, 10)}'),
             Text('No current task, great job!'),
           ],
         ),
       );
     } else {
-      var task = this.task!;
+      var task = this.widget.task!;
 
       return Container(
         padding: EdgeInsets.all(10.0),
@@ -43,13 +50,28 @@ class CurrentTask extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           children: [
             Text('Current task: ${task.title}'),
-            Text('Description: ${task.description}'),
-            Text('My sub-task 1'),
-            Text('My sub-task 2'),
-            Text('My sub-task 3'),
+            Expanded(child: Container()),
+            GestureDetector(
+              child: Icon(Icons.center_focus_weak_outlined),
+              onTap: () {
+                // Change the color of the container beneath
+                setState(
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FocusedModeScreen(
+                          task: task,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       );

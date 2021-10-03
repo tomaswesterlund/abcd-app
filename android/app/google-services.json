@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "201054431565",
+    "project_id": "abcd-app-test",
+    "storage_bucket": "abcd-app-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201054431565:android:171f53471c56ac78c1ef04",
+        "android_client_info": {
+          "package_name": "app.theabcd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201054431565-hv2bmp51vqi9okn4teckqejblmsas3pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4LZU6UNYRcsmuREmjDPQZnwXvmLwm2yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201054431565-hv2bmp51vqi9okn4teckqejblmsas3pt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

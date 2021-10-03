@@ -1,3 +1,5 @@
+import 'package:abcd_app/imports.dart';
+
 class Task {
   Task(
       {required this.type,
@@ -8,5 +10,5 @@ class Task {
   final String type;
   final String title;
   final String description;
-  final DateTime scheduledDate;
+  final Timestamp scheduledDate;
 }

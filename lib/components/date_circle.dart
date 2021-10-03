@@ -39,7 +39,6 @@ class _DateCircleState extends State<DateCircle> {
 
   BoxDecoration getBoxDecoration() {
     var color = Colors.black;
-    var difference = this.widget.date.difference(DateTime.now()).inDays;
 
     if (widget.date.isToday()) {
       color = Colors.green;

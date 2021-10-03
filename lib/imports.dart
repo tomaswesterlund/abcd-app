@@ -1,7 +1,10 @@
 //EXTERNAL
+export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:collection/collection.dart';
+export 'package:firebase_auth/firebase_auth.dart';
+export 'package:firebase_core/firebase_core.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/widgets.dart';
-
 //export 'package:intl/intl_browser.dart';
 export 'package:table_calendar/table_calendar.dart';
 
@@ -26,4 +29,6 @@ export 'extensions/date_extensions.dart';
 export 'models/task.dart';
 
 //SCREENS
+export 'screens/focused_mode_screen.dart';
+export 'screens/login_screen.dart';
 export 'screens/main_screen.dart';

@@ -1,5 +1,4 @@
 import 'package:abcd_app/imports.dart';
-import 'package:intl/intl.dart';
 
 class DatePicker extends StatefulWidget {
   DatePicker({required this.onDateClicked});
@@ -14,10 +13,16 @@ class _DatePickerState extends State<DatePicker> {
   bool showCalendar = false;
   DateTime focusedDay = DateTime.now();
 
+  void setDate(DateTime date) {
+    showCalendar = false;
+    focusedDay = date;
+    widget.onDateClicked(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(0.0),
         color: Colors.amberAccent,
         child: Column(
           children: [
@@ -26,25 +31,45 @@ class _DatePickerState extends State<DatePicker> {
                 firstDay: DateTime.utc(2010, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
                 focusedDay: focusedDay,
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    setDate(focusedDay);
+                  });
+                },
               ),
-            Row(
+            Column(
               children: [
-                Column(
-                  children: [
-                    GestureDetector(
-                      child: Icon(Icons.home_outlined),
-                      onTap: () {
-                        setState(
-                          () {
-                            focusedDay = DateTime.now();
-                          },
-                        );
-                      },
-                    ),
-                    Icon(Icons.arrow_left, size: 64.0),
-                  ],
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        child: Icon(Icons.home_outlined),
+                        onTap: () {
+                          setState(
+                            () {
+                              setDate(focusedDay);
+                            },
+                          );
+                        },
+                      ),
+                      Expanded(child: Container()),
+                      GestureDetector(
+                        child: Icon(Icons.today_outlined),
+                        onTap: () {
+                          // Change the color of the container beneath
+                          setState(
+                            () {
+                              setDate(DateTime.now());
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                Expanded(
+                Container(
+                  padding: EdgeInsets.only(bottom: 10.0),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -84,28 +109,6 @@ class _DatePickerState extends State<DatePicker> {
                       ],
                     ),
                   ),
-                ),
-                Column(
-                  children: [
-                    GestureDetector(
-                      child: Icon(Icons.today_outlined),
-                      onTap: () {
-                        // Change the color of the container beneath
-                        setState(
-                          () {
-                            print('Changing ...');
-                            showCalendar = !showCalendar;
-                            focusedDay = DateTime(2017, 9, 7, 17, 30);
-                            //!showCalendar;
-                          },
-                        );
-                      },
-                    ),
-                    Icon(
-                      Icons.arrow_right,
-                      size: 64.0,
-                    ),
-                  ],
                 ),
               ],
             ),

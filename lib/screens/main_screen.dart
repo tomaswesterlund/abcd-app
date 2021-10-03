@@ -1,6 +1,4 @@
-import 'package:abcd_app/components/current_task.dart';
 import 'package:abcd_app/imports.dart';
-import 'package:collection/collection.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -19,22 +17,38 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Building ...');
-    var tasks = TaskApi().getTasks(date: selectedDate);
-    var currentTask = tasks.firstOrNull;
+    // print('Building ...');
+    // var tasks = await TaskApi().getByDate(date: selectedDate);
+    // var currentTask = tasks.firstOrNull;
 
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CurrentTask(task: currentTask),
-            Expanded(child: TaskList(tasks: tasks)),
-            DatePicker(onDateClicked: onDateClicked),
-          ],
-        ),
-      ),
-    );
+    return FutureBuilder<List<Task>>(
+        future: TaskApi().getByDate(date: selectedDate),
+        builder: (context, AsyncSnapshot<List<Task>> snapshot) {
+          if (snapshot.hasData) {
+            var tasks = snapshot.data!;
+            var currentTask = tasks.firstOrNull;
+
+            return SafeArea(
+              child: Scaffold(
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      CurrentTask(task: currentTask, date: selectedDate),
+                      Expanded(child: TaskList(tasks: tasks)),
+                      DatePicker(onDateClicked: onDateClicked),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return Text("Loading ...");
+            //CircularProgressIndicator();
+          }
+        });
+
+    // ,)(
   }
 }

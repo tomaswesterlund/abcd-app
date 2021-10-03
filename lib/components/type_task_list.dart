@@ -1,11 +1,16 @@
 import 'package:abcd_app/imports.dart';
 
-class TypeTaskList extends StatelessWidget {
+class TypeTaskList extends StatefulWidget {
   TypeTaskList({required this.type, required this.tasks});
 
   final String type;
   final List<Task> tasks;
 
+  @override
+  _TypeTaskListState createState() => _TypeTaskListState();
+}
+
+class _TypeTaskListState extends State<TypeTaskList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,10 +29,11 @@ class TypeTaskList extends StatelessWidget {
       ),
       child: Column(
         children: [
-          HorizontalOrLine(height: 10, label: type),
+          HorizontalOrLine(height: 10, label: widget.type),
           ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: tasks.length,
+            itemCount: widget.tasks.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 margin: EdgeInsets.all(5.0),
@@ -35,9 +41,27 @@ class TypeTaskList extends StatelessWidget {
                   children: [
                     Checkbox(value: false, onChanged: null),
                     Expanded(
-                      child: Text('{$type${index + 1}} ${tasks[index].title}'),
+                      child: Text(
+                          '{${widget.type}${index + 1}} ${widget.tasks[index].title}'),
                     ),
-                    Icon(Icons.keyboard_arrow_down),
+                    GestureDetector(
+                      child: Icon(Icons.center_focus_weak_outlined),
+                      onTap: () {
+                        // Change the color of the container beneath
+                        setState(
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FocusedModeScreen(
+                                  task: widget.tasks[index],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               );
