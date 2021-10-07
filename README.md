@@ -1,16 +1,10 @@
-# abcd_app
-
-A new Flutter project.
+# ABCD App
+## Description
+This project contains a Flutter application that creates an implementation of the ABCD prioritization method.
 
 ## Getting Started
+### Frontend
+The application is build on [Flutter](https://flutter.dev/?gclid=CjwKCAjwtfqKBhBoEiwAZuesiMC4pJuhjHOEeypZVB1DzfnyQzIR1oQteDsTTHy472u7qa1v0ihpmRoCgTwQAvD_BwE&gclsrc=aw.ds) and requires the necessary SDK.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Backend
+The backend is provided by Firebase. The necessary packages are in the pubspec.yaml but service files containing your own API keys needs to be updated. Get more information here: https://firebase.google.com/docs/flutter/setup?platform=ios
