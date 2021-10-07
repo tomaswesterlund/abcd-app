@@ -11,4 +11,11 @@ class Task {
   final String title;
   final String description;
   final Timestamp scheduledDate;
+
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'title': title,
+        'description': description,
+        'scheduledDate': scheduledDate,
+      };
 }

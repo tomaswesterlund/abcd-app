@@ -5,6 +5,8 @@ export 'package:firebase_auth/firebase_auth.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/widgets.dart';
+export 'package:flutter_dropdown/flutter_dropdown.dart';
+
 //export 'package:intl/intl_browser.dart';
 export 'package:table_calendar/table_calendar.dart';
 
